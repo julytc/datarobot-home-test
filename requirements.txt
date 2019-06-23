@@ -1,0 +1,8 @@
+Flask
+GitHub-Flask
+PyGithub
+SQLAlchemy
+GitPython
+Flask-SQLAlchemy
+Flask-Migrate
+Flask-Script
