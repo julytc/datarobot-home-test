@@ -49,8 +49,8 @@ def token_getter(token=None):
 
 @bp.route('/repo')
 def repo():
-    user_repo_name = 'jt-test-assesment'
-    initial_repo_name = 'temp_repo'
+    user_repo_name = 'jt-datarobot-assesment'
+    initial_repo_name = 'datarobot-home-test'
     token = token_getter()
     g = Github(token)
     user = g.get_user()
