@@ -30,7 +30,7 @@ In this example we will use GCE resources.
 
 [sdk_installation](https://cloud.google.com/sdk/ "sdk_installation")
 
-** 2.2** Enable goole container registry, in order to store application image:
+**2.2** Enable goole container registry, in order to store application image:
 
 [gcr](https://cloud.google.com/container-registry/docs/quickstart "gcr")
 
