@@ -45,3 +45,4 @@ same as homepage URL but with the prefix
 `http://176.35.91.98/github-callback`
 
 **For detailed technical specification please follow**** link: 
+[specification doc](https://github.com/julytc/datarobot-home-test/blob/master/docs/specification.md)
