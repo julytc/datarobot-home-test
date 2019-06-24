@@ -1,5 +1,5 @@
 from flask import Flask, Blueprint, request, url_for, flash, g, redirect, session, render_template
-from github import Github, GithubException, UnknownObjectException
+from github import Github, GithubException, UnknownObjectException, BadCredentialsException
 import git
 from run import app, github
 from repo.models import users, db
@@ -16,20 +16,22 @@ def after_request(response):
     return response
 @bp.route('/', methods=['GET'])
 def home():
-    return render_template('index.html')
-@bp.route('/login', methods=['GET', 'POST'])
+    return render_template('index.html', isIndex=True)
+@bp.route('/login', methods=['GET'])
 def login():
     return github.authorize(scope="public_repo,read:user")
 @bp.route('/logout')
 def logout():
     session.pop('user_id', None)
+    return render_template('index.html',isIndex=True)
 @bp.route('/github-callback')
 @github.authorized_handler
 def authorized(oauth_token):
     if oauth_token is None:
         flash("Authorization failed.")
-        return redirect('/')
+        return render_template('index.html', isIndex=False)
     user = users.query.filter_by(github_access_token=oauth_token).first()
+    #add user token to database
     if user is None:
         user = users(oauth_token)
         db.session.add(user)
@@ -47,13 +49,14 @@ def token_getter(token=None):
     if user is not None:
         return user.github_access_token
 
-@bp.route('/repo')
+@bp.route('/repo', methods=['GET'])
 def repo():
     user_repo_name = 'jt-datarobot-assesment'
     initial_repo_name = 'datarobot-home-test'
     token = token_getter()
     g = Github(token)
     user = g.get_user()
+    #check if repo already exists
     try:
         user.get_repo(user_repo_name)
     except UnknownObjectException:
@@ -63,12 +66,12 @@ def repo():
         git_client.clone("https://%s@github.com/julytc/%s" % (token, initial_repo_name), "--bare")
         git_repo = git.Repo('%s.git' % initial_repo_name)
         git_repo.git.push('--mirror', "https://%s@github.com/%s" % ( token , user.get_repo(user_repo_name).full_name))
-        return redirect('/')
+        flash("Repo has been created. Link: https://github.com/%s" % user.get_repo(user_repo_name).full_name)
+        return render_template('index.html', isIndex=False)
+    except GithubException:
+         flash("You have to authentificate first. Please use /login endpoint")
+         return render_template('index.html', isIndex=False)
     else:
-        return redirect('/')
-
-
-
-
-
+        flash("Repository already exists")
+        return render_template('index.html', isIndex=False)
 

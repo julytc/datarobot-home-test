@@ -4,27 +4,35 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <title>RackSpace billing report</title>
+    <link rel="stylesheet" href="static/body.css">
+    <title>DataRobot home test Julia</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 <body>
-<div class="container">
-	<div class="row">
-        <img src="https://www.thomascook.com/blog/wp-content/uploads/2013/09/Brand-New-Logo-and-Slogan.jpg" class="img-responsive center-block" alt="TC logo">
-    </div>
-</div>
-<div class="container">
-<div class="row">
-<div class="col-lg-4 col-lg-offset-4">
-    <form method="post" enctype="multipart/form-data">
-        <div class="input-group">
-            <input type="file" name="file" class="form-control" placeholder="Upload report">
-            <span class="input-group-btn">
-            <button class="btn btn-default" type="submit">Upload</button>
-            </span>
+    <div class="container">
+        <div class="row">
+            <div class="jumbotron vertical-center align-top">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <h1 class="display-4" style="color:orange">Welcome to home test app</h1>
+                            {% if isIndex %}
+                                <a class="btn btn-primary btn-lg" href="/login" role="button">Get started</a>
+                            {% else %}
+                            <div class="alert alert-info alert-dismissible fade in text-center flashes" role="alert">
+                                    {% with messages = get_flashed_messages() %}
+                                    {% if messages %}                               
+                                      {% for message in messages %}
+                                        <strong> {{ message }}</strong>
+                                      {% endfor %}
+                                    {% endif %}
+                                  {% endwith %}
+                            </div>
+                            {% endif %}
+                        </div>                       
+                    </div>
+                </div>  
+            </div> 
         </div>
-    </form>
     </div>
- </div>
-</div>
 </body>
