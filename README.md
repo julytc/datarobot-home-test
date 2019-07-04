@@ -1,4 +1,4 @@
-# Datarobot home test
+# Github OAuth app
 
 Github OAuth app which clones code to the users account
 
