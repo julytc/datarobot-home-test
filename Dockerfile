@@ -1,4 +1,4 @@
-FROM python:3.6-alpine
+FROM python:3.10.7-alpine
 RUN apk add git
 COPY requirements.txt manage.py run.py ./
 COPY ./repo ./repo
