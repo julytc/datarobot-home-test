@@ -12,7 +12,7 @@ Flask-SQLAlchemy==2.4.0
 gitdb2==2.0.5
 GitHub-Flask==3.2.0
 GitPython==2.1.11
-idna==2.8
+idna==3.7
 importlib-metadata==0.18
 itsdangerous==1.1.0
 Jinja2==2.10.1
